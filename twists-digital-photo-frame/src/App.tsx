@@ -1,18 +1,17 @@
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+//import reactLogo from './assets/react.svg';
+//import viteLogo from '/vite.svg';
+import './App.css';
 
 // Bootstrap CSS import
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 // Components
-import CounterDisplay from './components/CounterDisplay'
-import CounterButton from './components/CounterButton'
+import CounterDisplay from './components/CounterDisplay';
+import CounterButton from './components/CounterButton';
 
 function App() {
-
   return (
     <>
-      <hr/>
+      <hr />
 
       <div className="container text-center mt-5 mb-5">
         <div className="card p-4">
@@ -25,9 +24,9 @@ function App() {
         </div>
       </div>
 
-      <hr/>
+      <hr />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

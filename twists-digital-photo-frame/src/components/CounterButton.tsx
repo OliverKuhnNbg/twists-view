@@ -8,12 +8,12 @@ const CounterButton: React.FC = () => {
 
   return (
     <>
-        <button className="btn btn-primary btn-lg me-2" onClick={increment}>
+      <button className="btn btn-primary btn-lg me-2" onClick={increment}>
         Zähler erhöhen
-        </button>
-        <button className="btn btn-primary btn-lg ms-2" onClick={decrement}>
+      </button>
+      <button className="btn btn-primary btn-lg ms-2" onClick={decrement}>
         Zähler veringern
-        </button>
+      </button>
     </>
   );
 };
