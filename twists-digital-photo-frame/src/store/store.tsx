@@ -7,11 +7,11 @@ interface CounterState {
   decrement: () => void;
 }
 
-// creates the store 
+// creates the store
 export const useCounterStore = create<CounterState>((set) => ({
   // initial state
   count: 0,
-  
+
   // 'Actions'
   // 'set' is a function from Zustand, which updates the current state the safe way.
   // both function`s take the current state and give back the new state.
