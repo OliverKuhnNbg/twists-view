@@ -26,11 +26,12 @@ export const usePhotoStore = create<PhotoState>((set) => ({
   currentIndex: 0,
 
   // Die Logik für den Bildwechsel
-  nextImage: () =>
-    set((state) => ({
-      // Gehe zum nächsten Index oder springe zum Anfang, wenn das Ende erreicht ist
-      currentIndex: (state.currentIndex + 1) % state.imageUrls.length,
-    })),
+  nextImage: () => {
+    set((state) => {
+      const newIndex = (state.currentIndex + 1) % state.imageUrls.length;
+      return { currentIndex: newIndex };
+    });
+  },
 
   prevImage: () =>
     set((state) => ({

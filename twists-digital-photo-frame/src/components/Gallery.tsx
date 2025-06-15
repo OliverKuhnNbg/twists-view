@@ -1,5 +1,3 @@
-// src/components/Gallery.tsx
-
 import { usePhotoStore } from '../store/photoStore';
 import { useEffect } from 'react';
 
