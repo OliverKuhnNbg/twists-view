@@ -15,7 +15,14 @@ interface PhotoState {
 // Erstelle den Store mit dem initialen Zustand und den Aktionen
 export const usePhotoStore = create<PhotoState>((set) => ({
   // Vorerst eine leere Liste. Wir füllen sie später.
-  imageUrls: [],
+  imageUrls: [
+    '/images/image1.png',
+    '/images/image2.png',
+    '/images/image3.png',
+    '/images/image4.png',
+    '/images/image5.png',
+    '/images/image6.png',
+  ],
   currentIndex: 0,
 
   // Die Logik für den Bildwechsel
