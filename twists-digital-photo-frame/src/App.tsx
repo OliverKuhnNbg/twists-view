@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // Components
 import CounterDisplay from './components/CounterDisplay';
 import CounterButton from './components/CounterButton';
+import { Gallery } from './components/Gallery';
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="container text-center mt-5 mb-5">
+        <Gallery />
       </div>
 
       <hr />
