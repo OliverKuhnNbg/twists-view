@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // Components
 import CounterDisplay from './components/CounterDisplay';
 import CounterButton from './components/CounterButton';
-import { Gallery } from './components/Gallery';
+import Gallery from './components/Gallery';
 
 function App() {
   return (

@@ -25,7 +25,7 @@ export const Gallery = () => {
   const currentImage = imageUrls[currentIndex];
 
   return (
-    // Ein einfacher Container für das Bild
+    // image container
     <div className="container">
       <img
         src={currentImage}
@@ -35,3 +35,5 @@ export const Gallery = () => {
     </div>
   );
 };
+
+export default Gallery;
