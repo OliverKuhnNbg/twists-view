@@ -1,12 +1,10 @@
-// src/components/PagingButton.tsx
-
 import { usePhotoStore } from '../../store/photoStore';
 
 // TODO: Erstelle auch eine SCSS-Datei für das Styling der Punkte
 // import './PagingButton.scss';
 
 export const PagingButton = () => {
-  // Hole die nötigen Daten und die NEUE Funktion aus dem Store
+  // get function from store
   const { nextImage } = usePhotoStore();
 
   const handleClick = () => {
