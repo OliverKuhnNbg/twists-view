@@ -6,6 +6,7 @@ import './App.scss';
 import CounterDisplay from './components/CounterDisplay';
 import CounterButton from './components/CounterButton';
 import Gallery from './components/Gallery';
+import PagingButton from './components/gallery-paging-button/PagingButton';
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
       </div>
       <div className="container text-center mt-5 mb-5">
         <Gallery />
+        <div className="row col-12">
+          <PagingButton />
+        </div>
       </div>
 
       <hr />
