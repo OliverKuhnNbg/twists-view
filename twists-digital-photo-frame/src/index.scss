@@ -1,0 +1,27 @@
+// src/styles/main.scss
+
+// 1. Überschreibe hier die Standard-Variablen von Bootstrap
+// Beispiel: Ändere die primäre Markenfarbe von Blau auf ein schönes Violett
+$primary: #712cf9;
+$secondary: #adb5bd;
+
+// Setze eine moderne Schriftart
+$font-family-sans-serif:
+  'Inter',
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  Roboto,
+  'Helvetica Neue',
+  Arial,
+  sans-serif;
+
+// 2. Importiere die komplette Bootstrap SCSS-Bibliothek
+// Bootstrap wird nun mit DEINEN oben definierten Variablen kompiliert.
+@import 'bootstrap/scss/bootstrap';
+
+// 3. Füge hier deine eigenen globalen Styles hinzu
+body {
+  background-color: #111; // Dunkler Hintergrund für die App
+  color: $light;
+}
