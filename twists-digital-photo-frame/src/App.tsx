@@ -1,13 +1,12 @@
 //import reactLogo from './assets/react.svg';
 //import viteLogo from '/vite.svg';
-import './App.css';
+import './App.scss';
 
-// Bootstrap CSS import
-import 'bootstrap/dist/css/bootstrap.min.css';
 // Components
 import CounterDisplay from './components/CounterDisplay';
 import CounterButton from './components/CounterButton';
-import { Gallery } from './components/Gallery';
+import Gallery from './components/Gallery';
+import PagingButton from './components/gallery-paging-button/PagingButton';
 
 function App() {
   return (
@@ -26,6 +25,9 @@ function App() {
       </div>
       <div className="container text-center mt-5 mb-5">
         <Gallery />
+        <div className="row col-12">
+          <PagingButton />
+        </div>
       </div>
 
       <hr />
