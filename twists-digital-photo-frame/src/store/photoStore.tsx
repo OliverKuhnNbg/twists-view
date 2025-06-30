@@ -6,6 +6,7 @@ interface PhotoState {
   imageUrls: string[];
   // Der Index des aktuell angezeigten Bildes in der Liste
   currentIndex: number;
+  timerId: number | null;
   // Aktion, um zum nächsten Bild zu wechseln
   nextImage: () => void;
   // Aktion, um zum vorherigen Bild zu wechseln
@@ -24,7 +25,6 @@ export const usePhotoStore = create<PhotoState>((set) => ({
     '/images/image6.png',
   ],
   currentIndex: 0,
-
   // Die Logik für den Bildwechsel
   nextImage: () => {
     set((state) => {
@@ -32,7 +32,6 @@ export const usePhotoStore = create<PhotoState>((set) => ({
       return { currentIndex: newIndex };
     });
   },
-
   prevImage: () =>
     set((state) => ({
       // Gehe zum vorherigen Index oder springe zum Ende, wenn der Anfang erreicht ist
@@ -40,4 +39,5 @@ export const usePhotoStore = create<PhotoState>((set) => ({
         (state.currentIndex - 1 + state.imageUrls.length) %
         state.imageUrls.length,
     })),
+  timerId: null,
 }));
