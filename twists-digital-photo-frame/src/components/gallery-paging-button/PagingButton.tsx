@@ -13,7 +13,7 @@ export const PagingButton = () => {
 
   return (
     <button className="btn btn-primary btn-lg ms-2" onClick={handleClick}>
-      Zähler veringern
+      Next Image
     </button>
   );
 };

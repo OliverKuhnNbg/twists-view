@@ -6,15 +6,18 @@ interface PhotoState {
   imageUrls: string[];
   // Der Index des aktuell angezeigten Bildes in der Liste
   currentIndex: number;
-  timerId: number | null;
   // Aktion, um zum nächsten Bild zu wechseln
   nextImage: () => void;
   // Aktion, um zum vorherigen Bild zu wechseln
   prevImage: () => void;
+  
+  timerId: number | null;
+  startTimer: () => void; // NEUE Aktion
+  stopTimer: () => void;  // NEUE Aktion
 }
 
 // Erstelle den Store mit dem initialen Zustand und den Aktionen
-export const usePhotoStore = create<PhotoState>((set) => ({
+export const usePhotoStore = create<PhotoState>((set, get) => ({
   // Vorerst eine leere Liste. Wir füllen sie später.
   imageUrls: [
     '/images/image1.png',
@@ -39,5 +42,19 @@ export const usePhotoStore = create<PhotoState>((set) => ({
         (state.currentIndex - 1 + state.imageUrls.length) %
         state.imageUrls.length,
     })),
+
+  /** Timer spezifikationen */
   timerId: null,
+  // NEUE Aktionen zur Timer-Steuerung
+  startTimer: () => {
+    // 1. Stoppe immer einen eventuell bereits laufenden Timer.
+    //    Das ist der Schlüssel zum "Zurücksetzen".
+    if (get().timerId) {
+      clearInterval(get().timerId as number);
+    }
+    
+  },
+  stopTimer: () => {
+    
+  },
 }));
