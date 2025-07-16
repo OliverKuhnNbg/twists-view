@@ -3,18 +3,26 @@ import { useEffect } from 'react';
 
 export const Gallery = () => {
   // Hole den Zustand und die Aktionen aus dem Store
-  const { imageUrls, currentIndex, nextImage } = usePhotoStore();
+  // 1. Selektiere nur die State-Werte, die für die Anzeige nötig sind.
+  // Die Komponente rendert jetzt nur neu, wenn sich einer dieser Werte ändert.
+  const imageUrls = usePhotoStore((state) => state.imageUrls);
+  const currentIndex = usePhotoStore((state) => state.currentIndex);
+
+  // 2. Hole die Aktionen separat. Da sie sich nie ändern, verursachen sie keine Re-Renders.
+  // Die Komponente rendert NICHT neu, wenn sich einer dieser Werte ändert.
+  const { startTimer, stopTimer } = usePhotoStore.getState();
 
   // Effekt, um alle 5 Sekunden automatisch zum nächsten Bild zu wechseln
   useEffect(() => {
-    // Starte einen Timer
-    const timer = setInterval(() => {
-      nextImage(); // Rufe die Aktion aus dem Store auf
-    }, 5000); // 5000ms = 5 Sekunden
+    startTimer();
 
-    // Aufräumfunktion: Stoppt den Timer, wenn die Komponente zerstört wird
-    return () => clearInterval(timer);
-  }, [nextImage]); // Führe den Effekt erneut aus, falls sich `nextImage` ändert
+    // Die Aufräumfunktion ist SEHR WICHTIG!
+    // Sie wird aufgerufen, wenn die Komponente zerstört wird.
+    return () => {
+      // Stoppe den Timer, um Speicherlecks und Fehler zu vermeiden.
+      stopTimer();
+    };
+  }, [startTimer, stopTimer]); // Führe den Effekt erneut aus, falls sich `nextImage` ändert
 
   // Falls keine Bilder vorhanden sind, zeige eine Lade-Meldung
   if (imageUrls.length === 0) {
@@ -28,6 +36,7 @@ export const Gallery = () => {
     // image container
     <div className="container">
       <img
+        /** key={currentImage} // funzt an der stelle nicht führt zu jumping am Anfang */
         src={currentImage}
         alt="Digital Photo Frame"
         style={{ width: '100%', height: '100%', objectFit: 'contain' }}
