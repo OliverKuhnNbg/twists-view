@@ -4,7 +4,7 @@ import './App.scss';
 
 // Components
 import Gallery from './components/Gallery';
-import PagingButton from './components/gallery-paging-button/PagingButton';
+import SwitchArea from './components/switch-area/SwitchArea';
 
 function App() {
   return (
@@ -13,10 +13,7 @@ function App() {
         <div className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center">
           <Gallery />
         </div>
-
-        <div className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center">
-          <PagingButton />
-        </div>
+        <SwitchArea />
       </div>
     </div>
   );

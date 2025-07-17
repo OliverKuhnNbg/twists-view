@@ -12,7 +12,10 @@ export const PagingButton = () => {
   };
 
   return (
-    <button className="btn btn-primary btn-lg ms-2" onClick={handleClick}>
+    <button
+      className="btn btn-primary btn-lg position-absolute end-0"
+      onClick={handleClick}
+    >
       Next Image
     </button>
   );
