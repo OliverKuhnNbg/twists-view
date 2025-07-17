@@ -34,14 +34,12 @@ export const Gallery = () => {
 
   return (
     // image container
-    <div className="container">
-      <img
-        /** key={currentImage} // funzt an der stelle nicht führt zu jumping am Anfang */
-        src={currentImage}
-        alt="Digital Photo Frame"
-        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-      />
-    </div>
+    <img
+      /** key={currentImage} // funzt an der stelle nicht führt zu jumping am Anfang */
+      src={currentImage}
+      alt="Digital Photo Frame"
+      style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+    />
   );
 };
 
