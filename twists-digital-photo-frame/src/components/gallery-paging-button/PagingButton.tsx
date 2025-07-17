@@ -11,9 +11,12 @@ export const PagingButton = () => {
     nextImage();
   };
 
+  const circleDimensions = { width: '60px', height: '60px' };
+
   return (
     <button
-      className="btn btn-primary btn-lg position-absolute end-0"
+      className="btn btn-primary btn-lg position-absolute end-0 rounded-circle d-flex align-items-center justify-content-center"
+      style={circleDimensions}
       onClick={handleClick}
     >
       Next Image
