@@ -34,9 +34,9 @@ export const Gallery = () => {
 
   return (
     // image container
-    <div className="container">
+    <div className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center">
       <img
-        /** key={currentImage} // funzt an der stelle nicht führt zu jumping am Anfang */
+        /** key={currentImage} // funzt an der Stelle nicht führt zu Jumping beim laden der Seite */
         src={currentImage}
         alt="Digital Photo Frame"
         style={{ width: '100%', height: '100%', objectFit: 'contain' }}
