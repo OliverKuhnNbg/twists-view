@@ -1,0 +1,21 @@
+.background-image-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; // Legt den Container hinter allen anderen Inhalt
+
+  background-size: cover;
+  background-position: center center;
+
+  // Blur-Effekt und leichter Zoom gegen die Ränder
+  filter: blur(20px);
+  transform: scale(1.1);
+
+  // Sorgt für einen weichen Übergang, wenn sich des Hintergriundbildes ändert
+  transition: background-image 0.8s ease-in-out;
+
+  // Steuert die Transparenz bzw. Dunkelheit des Hintergriundbildes
+  opacity: 33.33%;
+}
