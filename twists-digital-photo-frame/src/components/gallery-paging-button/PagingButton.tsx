@@ -12,7 +12,8 @@ export const PagingButton: React.FC<PagingButtonProps> = ({ direction }) => {
   // get function from store
   const { nextImage, prevImage } = usePhotoStore();
 
-  const handleClick = () => {
+  /* onClick()-Handler **/
+  const handleClick: () => void = () => {
     if (direction === 'left') {
       prevImage();
     } else {
