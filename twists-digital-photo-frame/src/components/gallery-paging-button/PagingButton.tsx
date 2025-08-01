@@ -9,7 +9,7 @@ interface PagingButtonProps {
 
 // 2. Die Komponente empfängt nun die Props 'direction' und 'text'
 export const PagingButton: React.FC<PagingButtonProps> = ({ direction }) => {
-  // get function from store
+  /* load functions from store **/
   const { nextImage, prevImage } = usePhotoStore();
 
   /* onClick()-Handler **/
