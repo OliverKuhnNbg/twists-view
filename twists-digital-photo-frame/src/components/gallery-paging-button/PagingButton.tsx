@@ -3,7 +3,12 @@ import { usePhotoStore } from '../../store/photoStore';
 // TODO: Erstelle auch eine SCSS-Datei für das Styling der Punkte
 // import './PagingButton.scss';
 
-export const PagingButton = () => {
+interface PagingButtonProps {
+  direction: string;
+}
+
+// 2. Die Komponente empfängt nun die Props 'direction' und 'text'
+export const PagingButton: React.FC<PagingButtonProps> = ({ direction }) => {
   // get function from store
   const { nextImage } = usePhotoStore();
 
@@ -12,6 +17,7 @@ export const PagingButton = () => {
   };
 
   const circleDimensions = { width: '60px', height: '60px' };
+  const btnText = direction === 'left' ? 'Next Image' : 'Prev Image';
 
   return (
     <button
@@ -19,7 +25,7 @@ export const PagingButton = () => {
       style={circleDimensions}
       onClick={handleClick}
     >
-      Next Image
+      {btnText}
     </button>
   );
 };
