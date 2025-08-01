@@ -1,4 +1,4 @@
-import { usePhotoStore } from '../store/photoStore';
+import { usePhotoStore } from '../../store/photoStore';
 import { useEffect } from 'react';
 
 export const Gallery = () => {
