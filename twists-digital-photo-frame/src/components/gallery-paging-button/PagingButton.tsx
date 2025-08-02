@@ -27,11 +27,11 @@ export const PagingButton: React.FC<PagingButtonProps> = ({ direction }) => {
   // btn text
   const btnText = direction === 'left' ? 'Prev Image' : 'Next Image';
   // btn align
-  const leftDir: string =
+  const leftDirCss: string =
     'btn btn-primary btn-lg position-absolute start-0 rounded-circle d-flex align-items-center justify-content-center';
-  const rightDir: string =
+  const rightDirCss: string =
     'btn btn-primary btn-lg position-absolute end-0 rounded-circle d-flex align-items-center justify-content-center';
-  const btnCss = direction === 'left' ? leftDir : rightDir;
+  const btnCss = direction === 'left' ? leftDirCss : rightDirCss;
 
   return (
     <button className={btnCss} style={circleDimensions} onClick={handleClick}>
