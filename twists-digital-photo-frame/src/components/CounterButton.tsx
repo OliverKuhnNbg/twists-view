@@ -3,8 +3,8 @@ import { useCounterStore } from '../store/store';
 
 const CounterButton: React.FC = () => {
   // Getting the 'increment' & 'decrement' function from store.
-  const increment = useCounterStore((state) => state.increment);
-  const decrement = useCounterStore((state) => state.decrement);
+  const increment: () => void = useCounterStore((state) => state.increment);
+  const decrement: () => void = useCounterStore((state) => state.decrement);
 
   return (
     <>

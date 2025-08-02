@@ -5,8 +5,8 @@ export const Gallery = () => {
   // Hole den Zustand und die Aktionen aus dem Store
   // 1. Selektiere nur die State-Werte, die für die Anzeige nötig sind.
   // Die Komponente rendert jetzt nur neu, wenn sich einer dieser Werte ändert.
-  const imageUrls = usePhotoStore((state) => state.imageUrls);
-  const currentIndex = usePhotoStore((state) => state.currentIndex);
+  const imageUrls: string[] = usePhotoStore((state) => state.imageUrls);
+  const currentIndex: number = usePhotoStore((state) => state.currentIndex);
 
   // 2. Hole die Aktionen separat. Da sie sich nie ändern, verursachen sie keine Re-Renders.
   // Die Komponente rendert NICHT neu, wenn sich einer dieser Werte ändert.
@@ -30,7 +30,7 @@ export const Gallery = () => {
   }
 
   // Hole die URL des aktuellen Bildes
-  const currentImage = imageUrls[currentIndex];
+  const currentImage: string = imageUrls[currentIndex];
 
   return (
     // image container
