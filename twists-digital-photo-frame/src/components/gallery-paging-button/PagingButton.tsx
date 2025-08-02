@@ -9,10 +9,11 @@ interface PagingButtonProps {
 
 // 2. Die Komponente empfängt nun die Props 'direction' und 'text'
 export const PagingButton: React.FC<PagingButtonProps> = ({ direction }) => {
-  // get function from store
+  /* load functions from store **/
   const { nextImage, prevImage } = usePhotoStore();
 
-  const handleClick = () => {
+  /* onClick()-Handler **/
+  const handleClick: () => void = () => {
     if (direction === 'left') {
       prevImage();
     } else {
@@ -22,15 +23,15 @@ export const PagingButton: React.FC<PagingButtonProps> = ({ direction }) => {
 
   /* Btn Appearance **/
   // btn size
-  const circleDimensions = { width: '60px', height: '60px' };
+  const circleDimensions: object = { width: '60px', height: '60px' };
   // btn text
-  const btnText = direction === 'left' ? 'Prev Image' : 'Next Image';
+  const btnText: string = direction === 'left' ? 'Prev Image' : 'Next Image';
   // btn align
-  const leftDir: string =
+  const leftDirCss: string =
     'btn btn-primary btn-lg position-absolute start-0 rounded-circle d-flex align-items-center justify-content-center';
-  const rightDir: string =
+  const rightDirCss: string =
     'btn btn-primary btn-lg position-absolute end-0 rounded-circle d-flex align-items-center justify-content-center';
-  const btnCss = direction === 'left' ? leftDir : rightDir;
+  const btnCss: string = direction === 'left' ? leftDirCss : rightDirCss;
 
   return (
     <button className={btnCss} style={circleDimensions} onClick={handleClick}>
