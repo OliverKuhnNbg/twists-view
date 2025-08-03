@@ -28,7 +28,7 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
     '/images/image6.png',
   ],
   currentIndex: 0,
-  // Die Logik für den Bildwechsel
+  // Logic for image change
   nextImage: () => {
     set((state) => {
       const newIndex = (state.currentIndex + 1) % state.imageUrls.length;
@@ -48,10 +48,10 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
 
   /** Image Timer spezifications */
   timerId: null,
-  // NEUE Aktionen zur Timer-Steuerung
+  // NEW action to control image timer
   startTimer: () => {
     // 1. Stoppe immer einen eventuell bereits laufenden Timer.
-    //    Das ist der Schlüssel zum "Zurücksetzen".
+    //    That`s the "reset" key.
     if (get().timerId) {
       clearInterval(get().timerId as number);
     }
@@ -61,7 +61,7 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
         currentIndex: (state.currentIndex + 1) % state.imageUrls.length,
       }));
     }, 5000); // 5000 ms => 5 sec
-    // 3. Speichere die ID des neuen Timers im Zustand.
+    // 3. set new timer ID of Zustand.
     set({ timerId: newTimerId });
   },
   stopTimer: () => {
