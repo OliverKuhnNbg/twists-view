@@ -10,7 +10,7 @@ interface PhotoState {
   nextImage: () => void;
   // Aktion, um zum vorherigen Bild zu wechseln
   prevImage: () => void;
-  // Timer
+  // Image Timer
   timerId: number | null;
   startTimer: () => void;
   stopTimer: () => void;
@@ -46,24 +46,22 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
     get().startTimer();
   },
 
-  /** Timer spezifications */
+  /** Image Timer spezifications */
   timerId: null,
   // NEUE Aktionen zur Timer-Steuerung
   startTimer: () => {
-    console.log('\n\ntimer started - ' + get().timerId);
     // 1. Stoppe immer einen eventuell bereits laufenden Timer.
     //    Das ist der Schlüssel zum "Zurücksetzen".
     if (get().timerId) {
       console.log('timer cleared- ' + get().timerId);
       clearInterval(get().timerId as number);
     }
-    console.log('timer new id1 - ' + get().timerId);
+
     const newTimerId = setInterval(() => {
       set((state) => ({
         currentIndex: (state.currentIndex + 1) % state.imageUrls.length,
       }));
-    }, 5000);
-    console.log('timer new id2 - ' + get().timerId);
+    }, 5000); // 5000 ms => 5 sec
     // 3. Speichere die ID des neuen Timers im Zustand.
     set({ timerId: newTimerId });
   },
