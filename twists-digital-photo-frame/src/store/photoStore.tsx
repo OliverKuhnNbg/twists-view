@@ -53,7 +53,6 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
     // 1. Stoppe immer einen eventuell bereits laufenden Timer.
     //    Das ist der Schlüssel zum "Zurücksetzen".
     if (get().timerId) {
-      console.log('timer cleared- ' + get().timerId);
       clearInterval(get().timerId as number);
     }
 
@@ -67,7 +66,6 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
   },
   stopTimer: () => {
     if (get().timerId) {
-      console.log('timer stoppd - ' + get().timerId);
       clearInterval(get().timerId as number);
       set({ timerId: null });
     }
