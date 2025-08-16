@@ -14,6 +14,11 @@ interface PhotoState {
   timerId: number | null;
   startTimer: () => void;
   stopTimer: () => void;
+  // GUI Timer
+  isHiden: boolean;
+  guiTimerId: number | null;
+  guiTimerController: () => void;
+  stopGuiTimer: () => void;
 }
 
 // Erstelle den Store mit dem initialen Zustand und den Aktionen
@@ -68,6 +73,41 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
     if (get().timerId) {
       clearInterval(get().timerId as number);
       set({ timerId: null });
+    }
+  },
+
+  /** GUI Timer spezifications */
+  guiTimerId: null as number | null,
+  isHiden: false,
+  // NEW action to control GUI timer
+  // Diese Aktion wird bei jeder Mausbewegung aufgerufen.
+  guiTimerController: () => {
+    const { guiTimerId } = get();
+
+    // 1. Zuerst den bestehenden Timer löschen, um ihn zurückzusetzen.
+    // Das ist entscheidend, um zu verhindern, dass mehrere Timer gleichzeitig
+    // laufen, was zu ineffizientem Verhalten und Memory Leaks führen würde.
+    if (guiTimerId) {
+      clearInterval(guiTimerId);
+    }
+
+    // 2. Das Element sofort als sichtbar markieren.
+    set({ isHiden: false });
+
+    // 3. Einen neuen Timer starten, der das Element nach 3 Sekunden ausblendet.
+    const newGuiTimerId = setInterval(() => {
+      set({ isHiden: true });
+    }, 3000);
+
+    // 4. Die ID des neuen Timers im Zustand speichern.
+    set({ guiTimerId: newGuiTimerId });
+  },
+  // Diese Aktion stoppt den Timer vollständig, z.B. wenn die Komponente
+  // zerstört wird.
+  stopGuiTimer: () => {
+    if (get().guiTimerId) {
+      clearInterval(get().guiTimerId as number);
+      set({ guiTimerId: null });
     }
   },
 }));
