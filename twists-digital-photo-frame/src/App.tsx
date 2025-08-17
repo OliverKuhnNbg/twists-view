@@ -12,7 +12,7 @@ function App() {
   const { guiTimerController, stopGuiTimer } = usePhotoStore.getState();
 
   useEffect(() => {
-    console.log('\n\nTest call');
+    console.info('\n\nApp Component mounted!\n\n');
     guiTimerController();
 
     return () => {
