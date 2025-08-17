@@ -1,4 +1,7 @@
+import type { ReactNode } from 'react';
 import { usePhotoStore } from '../../store/photoStore';
+
+import { ArrowLeftIcon, ArrowRightIcon } from '@phosphor-icons/react';
 
 // TODO: Erstelle auch eine SCSS-Datei für das Styling der Punkte
 // import './PagingButton.scss';
@@ -25,7 +28,9 @@ export const PagingButton: React.FC<PagingButtonProps> = ({ direction }) => {
   // btn size
   const circleDimensions: object = { width: '60px', height: '60px' };
   // btn text
-  const btnText: string = direction === 'left' ? 'Prev Image' : 'Next Image';
+  //const btnText: string = direction === 'left' ? 'Prev Image' : 'Next Image';
+  const btnIcon: ReactNode =
+    direction === 'left' ? <ArrowLeftIcon /> : <ArrowRightIcon />;
   // btn align
   const leftDirCss: string =
     'btn btn-primary btn-lg position-absolute start-0 rounded-circle d-flex align-items-center justify-content-center';
@@ -35,7 +40,7 @@ export const PagingButton: React.FC<PagingButtonProps> = ({ direction }) => {
 
   return (
     <button className={btnCss} style={circleDimensions} onClick={handleClick}>
-      {btnText}
+      {btnIcon}
     </button>
   );
 };

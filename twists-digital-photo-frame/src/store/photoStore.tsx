@@ -10,10 +10,15 @@ interface PhotoState {
   nextImage: () => void;
   // Aktion, um zum vorherigen Bild zu wechseln
   prevImage: () => void;
-  // Timer
+  // Image Timer
   timerId: number | null;
   startTimer: () => void;
   stopTimer: () => void;
+  // GUI Timer
+  isHiden: boolean;
+  guiTimerId: number | null;
+  guiTimerController: () => void;
+  stopGuiTimer: () => void;
 }
 
 // Erstelle den Store mit dem initialen Zustand und den Aktionen
@@ -28,7 +33,7 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
     '/images/image6.png',
   ],
   currentIndex: 0,
-  // Die Logik für den Bildwechsel
+  // Logic for image change
   nextImage: () => {
     set((state) => {
       const newIndex = (state.currentIndex + 1) % state.imageUrls.length;
@@ -46,32 +51,63 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
     get().startTimer();
   },
 
-  /** Timer spezifications */
+  /** Image Timer spezifications */
   timerId: null,
-  // NEUE Aktionen zur Timer-Steuerung
+  // NEW action to control image timer
   startTimer: () => {
-    console.log('\n\ntimer started - ' + get().timerId);
     // 1. Stoppe immer einen eventuell bereits laufenden Timer.
-    //    Das ist der Schlüssel zum "Zurücksetzen".
+    //    That`s the "reset" key.
     if (get().timerId) {
-      console.log('timer cleared- ' + get().timerId);
       clearInterval(get().timerId as number);
     }
-    console.log('timer new id1 - ' + get().timerId);
+
     const newTimerId = setInterval(() => {
       set((state) => ({
         currentIndex: (state.currentIndex + 1) % state.imageUrls.length,
       }));
-    }, 5000);
-    console.log('timer new id2 - ' + get().timerId);
-    // 3. Speichere die ID des neuen Timers im Zustand.
+    }, 5000); // 5000 ms => 5 sec
+    // 3. set new timer ID of Zustand.
     set({ timerId: newTimerId });
   },
   stopTimer: () => {
     if (get().timerId) {
-      console.log('timer stoppd - ' + get().timerId);
       clearInterval(get().timerId as number);
       set({ timerId: null });
+    }
+  },
+
+  /** GUI Timer spezifications */
+  guiTimerId: null as number | null,
+  isHiden: false,
+  // NEW action to control GUI timer
+  // Diese Aktion wird bei jeder Mausbewegung aufgerufen.
+  guiTimerController: () => {
+    const { guiTimerId } = get();
+
+    // 1. Zuerst den bestehenden Timer löschen, um ihn zurückzusetzen.
+    // Das ist entscheidend, um zu verhindern, dass mehrere Timer gleichzeitig
+    // laufen, was zu ineffizientem Verhalten und Memory Leaks führen würde.
+    if (guiTimerId) {
+      clearInterval(guiTimerId);
+    }
+
+    // 2. Das Element sofort als sichtbar markieren.
+    set({ isHiden: false });
+
+    // 3. Einen neuen Timer starten, der das Element nach 3 Sekunden ausblendet.
+    const newGuiTimerId = setInterval(() => {
+      set({ isHiden: true });
+    }, 3000);
+
+    // 4. Die ID des neuen Timers im Zustand speichern.
+    set({ guiTimerId: newGuiTimerId });
+  },
+  // Diese Aktion stoppt den Timer vollständig, z.B. wenn die Komponente
+  // zerstört wird.
+  stopGuiTimer: () => {
+    if (get().guiTimerId) {
+      clearInterval(get().guiTimerId as number);
+      set({ guiTimerId: null });
     }
   },
 }));
