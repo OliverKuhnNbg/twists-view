@@ -52,7 +52,7 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
   },
 
   /** Image Timer spezifications */
-  timerId: null,
+  timerId: null as number | null,
   // NEW action to control image timer
   startTimer: () => {
     // 1. Stoppe immer einen eventuell bereits laufenden Timer.
