@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import PagingButton from '../gallery-paging-button/PagingButton';
 
 interface SwitchAreaProps {
@@ -5,15 +6,25 @@ interface SwitchAreaProps {
 }
 
 function SwitchArea({ isHiden }: SwitchAreaProps) {
+  const fadeAnimation = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    transition: { duration: 0.5 },
+  };
+
   return (
-    <div className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center pe-none">
-      {/* The pe-auto class ensures that the buttons inside this container are clickable,
-          while the parent container (with pe-none) does not capture mouse events. */}
-      <div className={`${isHiden ? 'd-none' : 'd-flex'} pe-auto`}>
-        <PagingButton direction="right" />
-        <PagingButton direction="left" />
-      </div>
-    </div>
+    <AnimatePresence>
+      {!isHiden && (
+        <motion.div
+          className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
+          {...fadeAnimation}
+        >
+          <PagingButton direction="left" />
+          <PagingButton direction="right" />
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
