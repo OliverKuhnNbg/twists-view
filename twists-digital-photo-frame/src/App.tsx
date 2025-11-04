@@ -7,6 +7,7 @@ import { usePhotoStore } from './store/photoStore';
 import GalleryBackground from './components/gallery-background/GalleryBackground';
 import Gallery from './components/gallery/Gallery';
 import SwitchArea from './components/switch-area/SwitchArea';
+import PagingIndicators from './components/gallery-paging-indicator/PagingIndicators';
 
 function App() {
   // store data loaded for the GUI-Blend-In & -Out options
@@ -37,6 +38,7 @@ function App() {
       <div className="position-relative vh-100" onMouseMove={handleMouseMove}>
         <GalleryBackground />
         <Gallery />
+        <PagingIndicators/>
         <SwitchArea isHiden={isHiden} />
       </div>
     </div>
