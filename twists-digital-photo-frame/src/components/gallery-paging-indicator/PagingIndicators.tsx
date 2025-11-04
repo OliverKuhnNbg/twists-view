@@ -7,7 +7,11 @@ export const PagingIndicators= () => {
   return (
     // wrapper for the GUI-Indicator elements
     <div className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center mt-4">
-      {imageUrls.length} - {currentImageIndex+1}
+      <div className="container">
+        <div className="row justify-content-center">
+          {imageUrls.length} - {currentImageIndex + 1}
+        </div>
+      </div>
     </div>
   );
 };
