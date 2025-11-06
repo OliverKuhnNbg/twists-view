@@ -7,12 +7,8 @@ export const PagingIndicators= () => {
 
   return (
     // wrapper for the GUI-Indicator elements
-    <div className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center mt-4">
+    <div className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center">
       <div className="container">
-        <div className="row justify-content-center">
-          {imageUrls.length} - {currentImageIndex + 1}
-        </div>
-
         <div className="row justify-content-center mt-5">
           {imageUrls.map((url, index) => (
             <div 
@@ -20,11 +16,15 @@ export const PagingIndicators= () => {
               className={`col-1 text-center ${
                 index === currentImageIndex ? 'bg-info' : 'bg-primary'
               }`}
-              style={{ cursor: 'pointer', margin: '5px' }} // Optionales Styling
+              style={{ cursor: 'pointer', margin: '5px' }}
             >
-              {index + 1} 
+              {index + 1}
             </div>
           ))}
+        </div>
+
+        <div className="row justify-content-center">
+          {imageUrls.length} - {currentImageIndex + 1}
         </div>
       </div>
     </div>
