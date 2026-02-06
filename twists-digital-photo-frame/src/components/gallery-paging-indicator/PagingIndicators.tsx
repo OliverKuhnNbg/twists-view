@@ -22,7 +22,7 @@ export const PagingIndicators= () => {
             </div>
           ))}
         </div>
-
+        {/** additional number index will be removed later */ }
         <div className="row justify-content-center">
           {imageUrls.length} - {currentImageIndex + 1}
         </div>
