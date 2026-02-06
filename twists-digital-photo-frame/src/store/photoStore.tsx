@@ -15,7 +15,7 @@ interface PhotoState {
   startTimer: () => void;
   stopTimer: () => void;
   // GUI Timer
-  isHiden: boolean;
+  isHidden: boolean;
   guiTimerId: number | null;
   guiTimerController: () => void;
   stopGuiTimer: () => void;
@@ -62,7 +62,7 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
       clearInterval(get().timerId as number);
     }
 
-    const newTimerId = setInterval(() => {
+    const newTimerId = window.setInterval(() => {
       set((state) => ({
         currentIndex: (state.currentIndex + 1) % state.imageUrls.length,
       }));
@@ -79,7 +79,7 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
 
   /** GUI Timer spezifications */
   guiTimerId: null as number | null,
-  isHiden: false,
+  isHidden: false,
   // NEW action to control GUI timer
   // Diese Aktion wird bei jeder Mausbewegung aufgerufen.
   guiTimerController: () => {
@@ -93,11 +93,11 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
     }
 
     // 2. Das Element sofort als sichtbar markieren.
-    set({ isHiden: false });
+    set({ isHidden: false });
 
     // 3. Einen neuen Timer starten, der das Element nach 3 Sekunden ausblendet.
-    const newGuiTimerId = setInterval(() => {
-      set({ isHiden: true });
+    const newGuiTimerId = window.setTimeout(() => {
+      set({ isHidden: true });
     }, 3000);
 
     // 4. Die ID des neuen Timers im Zustand speichern.
