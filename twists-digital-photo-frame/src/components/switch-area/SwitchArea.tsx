@@ -2,10 +2,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import PagingButton from '../gallery-paging-button/PagingButton';
 
 interface SwitchAreaProps {
-  isHiden: boolean;
+  isHidden: boolean;
 }
 
-function SwitchArea({ isHiden }: SwitchAreaProps) {
+function SwitchArea({ isHidden }: SwitchAreaProps) {
   const fadeAnimation = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
@@ -15,7 +15,7 @@ function SwitchArea({ isHiden }: SwitchAreaProps) {
 
   return (
     <AnimatePresence>
-      {!isHiden && (
+      {!isHidden && (
         <motion.div
           className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
           {...fadeAnimation}

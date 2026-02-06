@@ -13,7 +13,7 @@ function App() {
   // store data loaded for the GUI-Blend-In & -Out options
   // 1. blend-in/blend-out state
   // 2. blend-in/blend-out functions which controlls the blend-in/blend-out state
-  const isHiden = usePhotoStore((state) => state.isHiden);
+  const isHidden = usePhotoStore((state) => state.isHidden);
   const { guiTimerController, stopGuiTimer } = usePhotoStore.getState();
 
   // init function - takes care about GUI-Timer
@@ -38,8 +38,8 @@ function App() {
       <div className="position-relative vh-100" onMouseMove={handleMouseMove}>
         <GalleryBackground />
         <Gallery />
-        <PagingIndicators/>
-        <SwitchArea isHiden={isHiden} />
+        <PagingIndicators />
+        <SwitchArea isHidden={isHidden} />
       </div>
     </div>
   );
