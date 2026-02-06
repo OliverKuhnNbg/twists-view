@@ -31,6 +31,7 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
     '/images/image4.png',
     '/images/image5.png',
     '/images/image6.png',
+    '/images/image7.png',
   ],
   currentIndex: 0,
   // Logic for image change
