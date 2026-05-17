@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: backend
+
+photo:
+  # image storage-path
+  storage-path: "/home/twist/twists-images"
