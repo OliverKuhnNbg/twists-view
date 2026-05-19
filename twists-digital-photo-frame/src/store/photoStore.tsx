@@ -121,8 +121,29 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
       // 2. Namen in fertige URLs umwandeln
       const fullUrls = fileNames.map((fileName) => buildPhotoUrl(fileName));
 
-      // 3. State aktualisieren
-      set({ imageUrls: fullUrls, currentIndex: 0 });
+      // 3. State aktualisieren (SMART UPDATE)
+      set((state) => {
+        // Welches Bild schaut der Nutzer sich exakt in diesem Moment an?
+        const currentImageUrl = state.imageUrls[state.currentIndex];
+
+        // Suchen wir dieses Bild in der frisch geladenen Liste vom Server
+        const newIndex = fullUrls.indexOf(currentImageUrl);
+
+        let finalIndex = 0;
+
+        if (newIndex !== -1) {
+          // Das Bild existiert noch! Wir springen auf seinen (evtl. neuen) Platz
+          finalIndex = newIndex;
+        } else if (state.currentIndex < fullUrls.length) {
+          // Das Bild wurde gelöscht, aber der alte Index liegt noch im Rahmen
+          finalIndex = state.currentIndex;
+        } else {
+          // Das Bild wurde gelöscht UND die Liste ist jetzt kürzer (Fallback auf 0)
+          finalIndex = 0;
+        }
+
+        return { imageUrls: fullUrls, currentIndex: finalIndex };
+      });
 
       console.log(`${fullUrls.length} Bilder erfolgreich geladen.`);
     } catch (error) {

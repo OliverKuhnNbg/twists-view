@@ -18,6 +18,11 @@ export const Gallery = () => {
   useEffect(() => {
     // Wird 1x beim Mounten der Komponente aufgerufen
     loadBackendPhotos();
+    // 2. Intervall einrichten: 5 Minuten = 5 * 60 * 1000 Millisekunden = 300.000 ms (5 minuten ist perfekt, eventuell reicht einmal in der Stunde)
+    const intervalId = setInterval(() => {
+      loadBackendPhotos();
+    }, 300000);
+
     startTimer();
 
     // Die Aufräumfunktion ist SEHR WICHTIG!
@@ -25,6 +30,7 @@ export const Gallery = () => {
     return () => {
       // Stoppe den Timer, um Speicherlecks und Fehler zu vermeiden.
       stopTimer();
+      clearInterval(intervalId);
     };
   }, [startTimer, stopTimer, loadBackendPhotos]); // Führe den Effekt erneut aus, falls sich `nextImage` ändert
 
