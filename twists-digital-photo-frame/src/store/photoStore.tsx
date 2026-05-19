@@ -59,7 +59,7 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
     // 1. Stoppe immer einen eventuell bereits laufenden Timer.
     //    That`s the "reset" key.
     if (get().timerId) {
-      clearInterval(get().timerId as number);
+      clearTimeout(get().timerId as number);
     }
 
     const newTimerId = window.setInterval(() => {
@@ -72,7 +72,7 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
   },
   stopTimer: () => {
     if (get().timerId) {
-      clearInterval(get().timerId as number);
+      clearTimeout(get().timerId as number);
       set({ timerId: null });
     }
   },
@@ -89,7 +89,7 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
     // Das ist entscheidend, um zu verhindern, dass mehrere Timer gleichzeitig
     // laufen, was zu ineffizientem Verhalten und Memory Leaks führen würde.
     if (guiTimerId) {
-      clearInterval(guiTimerId);
+      clearTimeout(guiTimerId);
     }
 
     // 2. Das Element sofort als sichtbar markieren.
@@ -107,7 +107,7 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
   // zerstört wird.
   stopGuiTimer: () => {
     if (get().guiTimerId) {
-      clearInterval(get().guiTimerId as number);
+      clearTimeout(get().guiTimerId as number);
       set({ guiTimerId: null });
     }
   },
