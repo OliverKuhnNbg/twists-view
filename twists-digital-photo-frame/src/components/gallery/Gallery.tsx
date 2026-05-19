@@ -8,12 +8,16 @@ export const Gallery = () => {
   const imageUrls: string[] = usePhotoStore((state) => state.imageUrls);
   const currentIndex: number = usePhotoStore((state) => state.currentIndex);
 
+  const loadBackendPhotos = usePhotoStore((state) => state.loadBackendPhotos);
+
   // 2. Hole die Aktionen separat. Da sie sich nie ändern, verursachen sie keine Re-Renders.
   // Die Komponente rendert NICHT neu, wenn sich einer dieser Werte ändert.
   const { startTimer, stopTimer } = usePhotoStore.getState();
 
   // Effekt, um alle 5 Sekunden automatisch zum nächsten Bild zu wechseln
   useEffect(() => {
+    // Wird 1x beim Mounten der Komponente aufgerufen
+    loadBackendPhotos();
     startTimer();
 
     // Die Aufräumfunktion ist SEHR WICHTIG!
@@ -22,7 +26,7 @@ export const Gallery = () => {
       // Stoppe den Timer, um Speicherlecks und Fehler zu vermeiden.
       stopTimer();
     };
-  }, [startTimer, stopTimer]); // Führe den Effekt erneut aus, falls sich `nextImage` ändert
+  }, [startTimer, stopTimer, loadBackendPhotos]); // Führe den Effekt erneut aus, falls sich `nextImage` ändert
 
   // Falls keine Bilder vorhanden sind, zeige eine Lade-Meldung
   if (imageUrls.length === 0) {

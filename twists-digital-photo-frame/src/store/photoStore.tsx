@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { buildPhotoUrl, fetchPhotoNames } from '../api/photoApi';
 
 // Definiere die Struktur des States und der Aktionen
 interface PhotoState {
@@ -19,36 +20,33 @@ interface PhotoState {
   guiTimerId: number | null;
   guiTimerController: () => void;
   stopGuiTimer: () => void;
+  // NEU: Funktion zum Laden der Bilder deklarieren
+  loadBackendPhotos: () => Promise<void>;
 }
 
 // Erstelle den Store mit dem initialen Zustand und den Aktionen
 export const usePhotoStore = create<PhotoState>((set, get) => ({
   // Vorerst eine leere Liste. Wir füllen sie später.
-  imageUrls: [
-    '/images/image1.png',
-    '/images/image2.png',
-    '/images/image3.png',
-    '/images/image4.png',
-    '/images/image5.png',
-    '/images/image6.png',
-    '/images/image7.png',
-  ],
+  imageUrls: [],
   currentIndex: 0,
   // Logic for image change
   nextImage: () => {
     set((state) => {
+      if (state.imageUrls.length === 0) return state; // Mini-Sicherheitscheck
       const newIndex = (state.currentIndex + 1) % state.imageUrls.length;
       return { currentIndex: newIndex };
     });
     get().startTimer();
   },
   prevImage: () => {
-    set((state) => ({
-      // Gehe zum vorherigen Index oder springe zum Ende, wenn der Anfang erreicht ist
-      currentIndex:
-        (state.currentIndex - 1 + state.imageUrls.length) %
-        state.imageUrls.length,
-    }));
+    set((state) => {
+      if (state.imageUrls.length === 0) return state; // Mini-Sicherheitscheck
+      return {
+        currentIndex:
+          (state.currentIndex - 1 + state.imageUrls.length) %
+          state.imageUrls.length,
+      };
+    });
     get().startTimer();
   },
 
@@ -109,6 +107,26 @@ export const usePhotoStore = create<PhotoState>((set, get) => ({
     if (get().guiTimerId) {
       clearTimeout(get().guiTimerId as number);
       set({ guiTimerId: null });
+    }
+  },
+
+  // --- NEU: Die Fetch-Logik einbauen ---
+  loadBackendPhotos: async () => {
+    try {
+      console.log('Lade Bilder vom lokalen Spring Boot Backend...');
+
+      // 1. Namen aus der API holen
+      const fileNames = await fetchPhotoNames();
+
+      // 2. Namen in fertige URLs umwandeln
+      const fullUrls = fileNames.map((fileName) => buildPhotoUrl(fileName));
+
+      // 3. State aktualisieren
+      set({ imageUrls: fullUrls, currentIndex: 0 });
+
+      console.log(`${fullUrls.length} Bilder erfolgreich geladen.`);
+    } catch (error) {
+      console.error('Fehler beim Abrufen der Bilder:', error);
     }
   },
 }));
